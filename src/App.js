@@ -1,11 +1,13 @@
-import './App.css';
+import React from 'react'
+import './App.css'
+import { CrudApp } from './components/CrudApp'
 
-function App() {
+function App () {
   return (
-    <div>
-     
-    </div>
-  );
+    <>
+      <h2>Ejercicios con React</h2>
+      <CrudApp />
+    </>
+  )
 }
-
-export default App;
+export default App
