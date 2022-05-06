@@ -10,11 +10,20 @@ const initialDb = [
   { id: 5, name: 'Ikki', constellation: 'Fenix' }
 ]
 export const CrudApp = () => {
-  const [db] = useState(initialDb)
+  const [db, setDb] = useState(initialDb)
+  const [dataToEdit, setDataToEdit] = useState(null)
+  const createData = (data) => {
+    data.id = db.length + 1
+    setDb([...db, data])
+  }
+  const updateData = (data) => {
+    setDb(db.map(e => (e.id === data.id) ? data : e))
+  }
+  const deleteData = (id) => {}
   return (
     <div><h2>CRUD APP</h2>
-    <CrudFrom />
-    <CrudTable data={db} />
+    <CrudFrom createData={createData} updateData={updateData} dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} />
+    <CrudTable data={db} setDataToEdit={setDataToEdit} deleteData={deleteData} />
     </div>
   )
 }
