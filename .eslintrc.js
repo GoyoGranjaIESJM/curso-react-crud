@@ -4,7 +4,7 @@ module.exports = {
     es2021: true
   },
   extends: [
-    // 'plugin:react/recommended',
+    'plugin:react/recommended',
     'standard'
   ],
   parserOptions: {
@@ -18,5 +18,6 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/prop-types': [0] // <-- Para evitar los prop-types
   }
 }
