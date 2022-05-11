@@ -28,16 +28,40 @@ export const CrudApi = () => {
   }, [])
 
   const createData = (data) => {
-    data.id = db.length + 1
-    setDb([...db, data])
+    // let data.id=Date.now(); // <- Para generar el id automáticamente
+    const options = { body: data, headers: { 'content-type': 'application/json' } }
+    api.post(url, options).then((res) => {
+      // console.log(res)
+      if (!res.err) {
+        setDb([...db, res])
+      } else {
+        setError(res)
+      }
+    })
   }
   const updateData = (data) => {
-    setDb(db.map((e) => (e.id === data.id ? data : e)))
+    const options = { body: data, headers: { 'content-type': 'application/json' } }
+    api.put(`${url}/${data.id}`, options).then((res) => {
+      // console.log(res)
+      if (!res.err) {
+        setDb(db.map((e) => (e.id === data.id ? data : e)))
+      } else {
+        setError(res)
+      }
+    })
   }
   const deleteData = (id) => {
     const isDelete = confirm('¿Desea eliminar')
     if (isDelete) {
-      setDb(db.filter((el) => el.id !== id))
+      const options = { headers: { 'content-type': 'application/json' } }
+      api.del(`${url}/${id}`, options).then((res) => {
+        // console.log(res)
+        if (!res.err) {
+          setDb(db.filter((el) => el.id !== id))
+        } else {
+          setError(res)
+        }
+      })
     }
   }
   return (
