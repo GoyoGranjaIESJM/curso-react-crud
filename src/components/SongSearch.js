@@ -14,15 +14,16 @@ export const SongSearch = () => {
     if (search === null) return
     const fetchData = async () => {
       const { artist, song } = search
-      const artitstUrl = `https://theaudiodb.com/api/v1/json/2/search.php?s=${artist}`
+      // Ejemplo de busqueda: yes - america / the police - roxanne
+      const artisttUrl = `https://theaudiodb.com/api/v1/json/2/search.php?s=${artist}`
       const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`
       setLoading(true)
-      const [artitsRes, songRes] = await Promise.all([
-        helpHttp().get(artitstUrl),
+      const [artistRes, songRes] = await Promise.all([
+        helpHttp().get(artisttUrl),
         helpHttp().get(songUrl)]
       )
-      console.log(artitsRes, songRes)
-      setBio(artitsRes)
+      // console.log(artistRes, songRes)
+      setBio(artistRes)
       setLyric(songRes)
       setLoading(false)
     }
@@ -32,12 +33,15 @@ export const SongSearch = () => {
     setSearch(data)
   }
   return (
-    <>
+    <section>
       <div>SongSearch</div>
-      {loading && <Loader />}
-      <SongForm handleSearch={handleSearch} />
-      <SongDetails search={search} lyric={lyric} bio={bio} />
-    </>
+      <article className='grid-1-3'>
+        {loading && <Loader />}
+        <SongForm handleSearch={handleSearch} />
+        {search && !loading &&
+          <SongDetails search={search} lyric={lyric} bio={bio} />}
+      </article>
+    </section>
   )
 }
 export default SongSearch

@@ -18,7 +18,7 @@ const SongForm = ({ handleSearch }) => {
     setForm(initialForm)
   }
   return (
-    <div>
+    <section>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -36,7 +36,7 @@ const SongForm = ({ handleSearch }) => {
         />
         <input type="submit" value="Enviar" />
       </form>
-    </div>
+    </section>
   )
 }
 
