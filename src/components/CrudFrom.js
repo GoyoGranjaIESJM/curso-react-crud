@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
 const inicialForm = {
+  id: null,
   name: '',
-  constellation: '',
-  id: null
+  constellation: ''
 }
 
-export const CrudFrom = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+export const CrudFrom = ({
+  createData,
+  updateData,
+  dataToEdit,
+  setDataToEdit
+}) => {
   const [form, setForm] = useState(inicialForm)
   useEffect(() => {
     if (dataToEdit) {
@@ -35,14 +40,26 @@ export const CrudFrom = ({ createData, updateData, dataToEdit, setDataToEdit }) 
     setDataToEdit(null)
   }
   return (
-        <div>
-            <h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Nombre" onChange={handleChange} value={form.name}/>
-                <input type="text" name="constellation" placeholder="Constelación" onChange={handleChange} value={form.constellation}/>
-                <input type="submit" value="Enviar" />
-                <input type="reset" value="Limpiar" onClick={handleReset} />
-            </form>
-        </div>
+    <div>
+      <h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Nombre"
+          onChange={handleChange}
+          value={form.name}
+        />
+        <input
+          type="text"
+          name="constellation"
+          placeholder="Constelación"
+          onChange={handleChange}
+          value={form.constellation}
+        />
+        <input type="submit" value="Enviar" />
+        <input type="reset" value="Limpiar" onClick={handleReset} />
+      </form>
+    </div>
   )
 }

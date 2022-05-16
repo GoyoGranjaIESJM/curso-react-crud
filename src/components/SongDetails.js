@@ -6,7 +6,7 @@ import SongLyric from './SongLyric'
 const SongDetails = ({ search, lyric, bio }) => {
   if (!lyric || !bio) return
   return (
-      <>
+    <>
       {lyric.error || lyric.err || lyric.name === 'AbortError'
         ? (
         <Message
@@ -27,7 +27,7 @@ const SongDetails = ({ search, lyric, bio }) => {
           bgColor="#dc3545"
         />
           )}
-      </>
+    </>
   )
 }
 

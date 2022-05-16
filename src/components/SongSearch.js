@@ -20,8 +20,8 @@ export const SongSearch = () => {
       setLoading(true)
       const [artistRes, songRes] = await Promise.all([
         helpHttp().get(artisttUrl),
-        helpHttp().get(songUrl)]
-      )
+        helpHttp().get(songUrl)
+      ])
       // console.log(artistRes, songRes)
       setBio(artistRes)
       setLyric(songRes)
@@ -35,11 +35,12 @@ export const SongSearch = () => {
   return (
     <section>
       <div>SongSearch</div>
-      <article className='grid-1-3'>
+      <article className="grid-1-3">
         {loading && <Loader />}
         <SongForm handleSearch={handleSearch} />
-        {search && !loading &&
-          <SongDetails search={search} lyric={lyric} bio={bio} />}
+        {search && !loading && (
+          <SongDetails search={search} lyric={lyric} bio={bio} />
+        )}
       </article>
     </section>
   )

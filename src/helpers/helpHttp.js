@@ -6,20 +6,24 @@ export const helpHttp = () => {
     const controller = new AbortController()
     options.signal = controller.signal
     options.method = options.method || 'GET'
-    options.headers = options.headers ? { ...defaultHeaders, ...options.headers } : defaultHeaders
+    options.headers = options.headers
+      ? { ...defaultHeaders, ...options.headers }
+      : defaultHeaders
     options.body = JSON.stringify(options.body) || false
     if (!options.body) delete options.body
     // console.log(options)
     setTimeout(() => controller.abort(), 3000) // -> Si despues de tres segundos no hay respuesta se produce error
     return fetch(endpoint, options)
-      .then((res) => res.ok
-        ? res.json()
-        // eslint-disable-next-line prefer-promise-reject-errors
-        : Promise.reject({
-          err: true,
-          status: res.status || '00',
-          statusText: res.statusText || 'Ocurrio un error'
-        }))
+      .then((res) =>
+        res.ok
+          ? res.json()
+          // eslint-disable-next-line prefer-promise-reject-errors
+          : Promise.reject({
+            err: true,
+            status: res.status || '00',
+            statusText: res.statusText || 'Ocurrio un error'
+          })
+      )
       .catch((err) => err)
   }
   const get = (url, options = {}) => customFetch(url, options)

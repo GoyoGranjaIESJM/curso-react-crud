@@ -29,7 +29,10 @@ export const CrudApi = () => {
 
   const createData = (data) => {
     // let data.id=Date.now(); // <- Para generar el id automáticamente
-    const options = { body: data, headers: { 'content-type': 'application/json' } }
+    const options = {
+      body: data,
+      headers: { 'content-type': 'application/json' }
+    }
     api.post(url, options).then((res) => {
       // console.log(res)
       if (!res.err) {
@@ -40,7 +43,10 @@ export const CrudApi = () => {
     })
   }
   const updateData = (data) => {
-    const options = { body: data, headers: { 'content-type': 'application/json' } }
+    const options = {
+      body: data,
+      headers: { 'content-type': 'application/json' }
+    }
     api.put(`${url}/${data.id}`, options).then((res) => {
       // console.log(res)
       if (!res.err) {
@@ -75,14 +81,19 @@ export const CrudApi = () => {
           setDataToEdit={setDataToEdit}
         />
         {loading && <Loader />}
-        {error && <Message msg={`Error ${error.status}:${error.statusText}`} bgColor="#dc3545"/>}
-        { db &&
-        <CrudTable
-          data={db}
-          setDataToEdit={setDataToEdit}
-          deleteData={deleteData}
-        />}
-
+        {error && (
+          <Message
+            msg={`Error ${error.status}:${error.statusText}`}
+            bgColor="#dc3545"
+          />
+        )}
+        {db && (
+          <CrudTable
+            data={db}
+            setDataToEdit={setDataToEdit}
+            deleteData={deleteData}
+          />
+        )}
       </article>
     </div>
   )

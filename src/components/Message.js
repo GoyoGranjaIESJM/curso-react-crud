@@ -10,7 +10,9 @@ const Message = ({ msg, bgColor }) => {
     backgroundColor: bgColor
   }
   return (
-    <div style={styles}><p>{msg}</p></div>
+    <div style={styles}>
+      <p>{msg}</p>
+    </div>
   )
 }
 
